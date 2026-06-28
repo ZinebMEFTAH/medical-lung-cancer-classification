@@ -1,22 +1,44 @@
-# Lung Cancer Classification using Deep Learning
+# Lung Cancer Classification with Deep Learning
 
-This project implements a diagnostic tool for classifying lung cancer types from CT-scan images using PyTorch. It evaluates and compares the performance of a Multi-Layer Perceptron (MLP) and a Convolutional Neural Network (CNN).
+A deep-learning pipeline that classifies lung cancer types from **CT-scan images**, built with PyTorch. It implements and compares a **Convolutional Neural Network (CNN)** and a **Multi-Layer Perceptron (MLP)** to study how each handles medical image features.
 
 ## Overview
-- **Dataset**: CT-scan images categorized into 4 classes: Adenocarcinoma, Large Cell Carcinoma, Squamous Cell Carcinoma, and Normal.
-- **Goal**: Automate medical diagnosis and compare feature extraction efficiency between dense and convolutional layers.
 
-## Architectures
-- **MLP**: 3-layer architecture with Dropout (0.2) and ReLU activation.
-- **CNN**: 2 Convolutional layers (Conv2d) with MaxPool2d and ReLU, followed by a classification head.
+- **Task:** classify CT-scan images into 4 classes — Adenocarcinoma, Large Cell Carcinoma, Squamous Cell Carcinoma, and Normal.
+- **Goal:** automate diagnostic classification and compare dense vs. convolutional feature extraction.
+
+## Models
+
+- **CNN** — 2 convolutional layers (Conv2d + MaxPool2d + ReLU) followed by a classification head.
+- **MLP** — 3-layer fully connected network with ReLU and dropout (0.2).
 
 ## Results
-- **CNN Performance**: Reached ~77% validation accuracy with significantly fewer parameters than the MLP.
-- **Key Observation**: The CNN showed superior spatial feature extraction, though both models exhibited overfitting after 15+ epochs on the small dataset.
+
+- The CNN reached **~77% validation accuracy** with far fewer parameters than the MLP, confirming the value of spatial feature extraction for imaging.
+- Both models showed overfitting after ~15 epochs on the small dataset — an honest limitation, and a clear direction for future work (more data, augmentation, regularization).
 
 ## Tech Stack
-- Python, PyTorch, Torchvision, Matplotlib, Scikit-learn.
 
-## How to use
-Run the training script:
-`python sup_train.py --model CNN --epochs 10 --lr 1e-4`
+- Python, PyTorch, Torchvision, scikit-learn, Matplotlib
+
+## Run
+
+```bash
+# Train the CNN
+python CnnGrayscaleModel.py
+
+# Train the MLP
+python MlpGrayscaleModel.py
+```
+
+CT-scan images are organized under `ct_scan/` (train/test splits by class).
+
+## Project Structure
+
+- `CnnGrayscaleModel.py` — CNN model, training, and evaluation
+- `MlpGrayscaleModel.py` — MLP model, training, and evaluation
+- `ct_scan/` — dataset (CT images by class)
+
+## Notes
+
+Deep-learning project applying computer vision to medical imaging, with a focus on comparing architectures and being transparent about dataset limitations.
